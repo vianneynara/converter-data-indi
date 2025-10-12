@@ -13,6 +13,7 @@ Tel. NOMOR TELPON
 # ... existing code ...
 import csv
 import re
+import time
 from pathlib import Path
 
 # Load text data
@@ -158,6 +159,8 @@ def validate_csv_against_txt(txt_path, csv_path):
 
     return missing_names, len(txt_fullnames_unique), len(csv_fullnames)
 
+# Start counting
+start_time = time.time()
 
 # Process each file
 for file_path in txt_files:
@@ -278,4 +281,7 @@ for file_path in txt_files:
     elif total_csv < total_txt:
         print(f"[⚠️] WARNING: CSV has FEWER entries ({total_csv}) than TXT names found ({total_txt})")
 
+end_time = time.time()
+
 print(f"[FINISHED] Processed {len(txt_files)} file(s)")
+print(f"Execution time: {end_time - start_time:.5f} seconds")
